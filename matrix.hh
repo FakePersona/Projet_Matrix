@@ -9,8 +9,10 @@ public:
   typedef double scalar_t;
 
 private:
-  unsigned size_i, size_j;
-  vector<vector<scalar_t>/**/> contents;
+  unsigned size_i, size_j, index;
+  static unsigned current_index;
+  vector<unsigned> lines, rows;
+  static vector<vector<vector<scalar_t>/**/>/**/> contents;
 
 public:
   Matrix(unsigned n, unsigned p);

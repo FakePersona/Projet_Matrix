@@ -15,12 +15,16 @@ using namespace std;
 Matrix::Matrix(unsigned n, unsigned p) {
   size_i = n;
   size_j = p;
+  index = current_index++;
   assert(1 <= size_i);
   assert(1 <= size_j);
 
-  contents = vector<vector<scalar_t>/**/>(size_i);
+  lines = vector<unsigned>(size_i,1);
+  rows = vector<unsigned>(size_j,1);
+
+  contents.at(index) = vector<vector<scalar_t>/**/>(size_i);
   for (unsigned i = 0; i < size_i; i++)
-    contents.at(i) = vector<scalar_t>(size_j, 0.0);	// Initialization to 0.0
+    contents.at(index).at(i) = vector<scalar_t>(size_j, 0.0);	// Initialization to 0.0
 }
 
 unsigned Matrix::get_size_i() const {
@@ -34,13 +38,73 @@ unsigned Matrix::get_size_j() const {
 void Matrix::set(unsigned i, unsigned j, scalar_t x) {
   assert(0 <= i && i < size_i);
   assert(0 <= j && j < size_j);
-  contents.at(i).at(j) = x;
+  /* Looking for the actual "i,j" */
+  int count_i =0, count_j=0, k, l;
+  for (k=0;k<size_i; k++)
+    {
+      if (lines.at(k))
+	{
+	  if (count_i == i)
+	    {
+	      break;
+	    } 
+	  else 
+	    {
+	      count_i++;
+	    }
+	}
+    }
+  for (l=0;l<size_i; l++)
+    {
+      if (rows.at(l))
+	{
+	  if (count_j == j)
+	    {
+	      break;
+	    } 
+	  else 
+	    {
+	      count_j++;
+	    }
+	}
+    }
+  contents.at(index).at(k).at(l) = x;
 }
 
 Matrix::scalar_t Matrix::get(unsigned i, unsigned j) const {
   assert(0 <= i && i < size_i);
   assert(0 <= j && j < size_j);
-  return contents.at(i).at(j);
+  int count_i =0, count_j=0, k, l;
+  for (k=0;k<size_i; k++)
+    {
+      if (lines.at(k))
+	{
+	  if (count_i == i)
+	    {
+	      break;
+	    } 
+	  else 
+	    {
+	      count_i++;
+	    }
+	}
+    }
+  for (l=0;l<size_i; l++)
+    {
+      if (rows.at(l))
+	{
+	  if (count_j == j)
+	    {
+	      break;
+	    } 
+	  else 
+	    {
+	      count_j++;
+	    }
+	}
+    }
+  
+  return contents.at(index).at(k).at(l);
 }
 
 void Matrix::print() const {
@@ -148,6 +212,8 @@ double norm(const Matrix& M1) {
   return n;
 }
 
+/*
+
 static Matrix submatrix(const Matrix& M1, unsigned a, unsigned b) {	//Note it is static!
   unsigned size_i = M1.get_size_i();
   unsigned size_j = M1.get_size_j();
@@ -235,3 +301,4 @@ Matrix inverse(const Matrix& M1) {
 
   return cofactors;
 }
+*/
