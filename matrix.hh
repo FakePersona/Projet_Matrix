@@ -10,9 +10,8 @@ public:
 
 private:
   unsigned size_i, size_j, index;
-  static unsigned current_index;
   vector<unsigned> lines, rows;
-  static vector<vector<vector<scalar_t>/**/>/**/> contents;
+  static vector<vector<vector<scalar_t> > > contents;
 
 public:
   Matrix(unsigned n, unsigned p);
@@ -34,13 +33,13 @@ Matrix operator*(Matrix::scalar_t a, const Matrix& M1);
 
 Matrix operator*(const Matrix& M1, const Matrix& M2);
 
-Matrix transpose(const Matrix& M1);
+//Matrix transpose(const Matrix& M1);
 
 Matrix Id(unsigned n);
 
 double norm(const Matrix& M1);
 
-Matrix::scalar_t determinant(const Matrix& M1);
+//Matrix::scalar_t determinant(const Matrix& M1);
 
-Matrix inverse(const Matrix& M1);
+//Matrix inverse(const Matrix& M1);
 

@@ -12,19 +12,26 @@
 
 using namespace std;
 
+vector<vector<vector<Matrix::scalar_t> > > Matrix::contents;
+
 Matrix::Matrix(unsigned n, unsigned p) {
   size_i = n;
   size_j = p;
-  index = current_index++;
   assert(1 <= size_i);
   assert(1 <= size_j);
 
   lines = vector<unsigned>(size_i,1);
   rows = vector<unsigned>(size_j,1);
 
-  contents.at(index) = vector<vector<scalar_t>/**/>(size_i);
+  index = contents.size();
+  contents.push_back( vector<vector<scalar_t> >(size_i) );
   for (unsigned i = 0; i < size_i; i++)
     contents.at(index).at(i) = vector<scalar_t>(size_j, 0.0);	// Initialization to 0.0
+}
+
+Matrix::Matrix(const Matrix& m)  
+{
+    
 }
 
 unsigned Matrix::get_size_i() const {
@@ -39,7 +46,7 @@ void Matrix::set(unsigned i, unsigned j, scalar_t x) {
   assert(0 <= i && i < size_i);
   assert(0 <= j && j < size_j);
   /* Looking for the actual "i,j" */
-  int count_i =0, count_j=0, k, l;
+  int count_i = 0, count_j = 0, k, l;
   for (k=0;k<size_i; k++)
     {
       if (lines.at(k))
@@ -110,7 +117,7 @@ Matrix::scalar_t Matrix::get(unsigned i, unsigned j) const {
 void Matrix::print() const {
   for (unsigned i = 0; i < size_i; i++) {
     for (unsigned j = 0; j < size_j; j++) {
-      cout << setprecision(2) << setw(8) << contents.at(i).at(j);
+      cout << setprecision(2) << setw(8) << contents.at(index).at(i).at(j);
     }
     cout << endl;
   }

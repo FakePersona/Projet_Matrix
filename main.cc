@@ -20,7 +20,7 @@ int main() {
   M.set(1, 2, -1.0);
   M.set(2, 2, 1.0);
 
-  Matrix MM = inverse(M);
+//  Matrix MM = inverse(M);
 
   /**************************
   Matrix M:
@@ -40,8 +40,8 @@ int main() {
   **************************/
 
   M.print();
-  cout << determinant(M) << endl;;
-  MM.print();
+//  cout << determinant(M) << endl;;
+//  MM.print();
 
-  cout << norm((M * MM) - Id(n)) << " " <<  norm((MM * M) - Id(n)) << endl;
+//  cout << norm((M * MM) - Id(n)) << " " <<  norm((MM * M) - Id(n)) << endl;
 }
