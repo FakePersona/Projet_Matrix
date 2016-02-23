@@ -19,6 +19,8 @@ int main() {
   M.set(0, 2, 2.0);
   M.set(1, 2, -1.0);
   M.set(2, 2, 1.0);
+  
+  M.removeRow(2);
 
 //  Matrix MM = inverse(M);
 
@@ -44,4 +46,6 @@ int main() {
 //  MM.print();
 
 //  cout << norm((M * MM) - Id(n)) << " " <<  norm((MM * M) - Id(n)) << endl;
+  
+  return 0;
 }

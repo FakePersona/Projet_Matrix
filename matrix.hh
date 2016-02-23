@@ -10,15 +10,22 @@ public:
 
 private:
   unsigned size_i, size_j, index;
-  vector<unsigned> lines, rows;
+  vector<bool> lines, rows;
   static vector<vector<vector<scalar_t> > > contents;
 
 public:
   Matrix(unsigned n, unsigned p);
+  Matrix(const Matrix& m);
+  
   unsigned get_size_i(void) const;
   unsigned get_size_j(void) const;
+  
+  void removeLine(unsigned i);
+  void removeRow(unsigned j);
+  
   void set(unsigned i, unsigned j, scalar_t x);
   scalar_t get(unsigned i, unsigned j) const;
+  
 
   void print() const;
 };

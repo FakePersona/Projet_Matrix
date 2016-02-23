@@ -20,8 +20,8 @@ Matrix::Matrix(unsigned n, unsigned p) {
   assert(1 <= size_i);
   assert(1 <= size_j);
 
-  lines = vector<unsigned>(size_i,1);
-  rows = vector<unsigned>(size_j,1);
+  lines = vector<bool>(size_i, true);
+  rows = vector<bool>(size_j, true);
 
   index = contents.size();
   contents.push_back( vector<vector<scalar_t> >(size_i) );
@@ -31,7 +31,11 @@ Matrix::Matrix(unsigned n, unsigned p) {
 
 Matrix::Matrix(const Matrix& m)  
 {
-    
+    size_i = m.size_i;
+    size_j = m.size_j;
+    index = m.index;
+    lines = m.lines;
+    rows = m.rows;
 }
 
 unsigned Matrix::get_size_i() const {
@@ -42,86 +46,70 @@ unsigned Matrix::get_size_j() const {
   return size_j;
 }
 
-void Matrix::set(unsigned i, unsigned j, scalar_t x) {
-  assert(0 <= i && i < size_i);
-  assert(0 <= j && j < size_j);
-  /* Looking for the actual "i,j" */
-  int count_i = 0, count_j = 0, k, l;
-  for (k=0;k<size_i; k++)
-    {
-      if (lines.at(k))
-	{
-	  if (count_i == i)
-	    {
-	      break;
-	    } 
-	  else 
-	    {
-	      count_i++;
-	    }
-	}
-    }
-  for (l=0;l<size_i; l++)
-    {
-      if (rows.at(l))
-	{
-	  if (count_j == j)
-	    {
-	      break;
-	    } 
-	  else 
-	    {
-	      count_j++;
-	    }
-	}
-    }
-  contents.at(index).at(k).at(l) = x;
+
+static unsigned index_nth(vector<bool> vect, unsigned n) 
+{    
+    unsigned count = 0, k;
+    for (k = 0; count <= n && k < vect.size(); k++)
+        count += vect[k];
+    return k-1;
 }
 
-Matrix::scalar_t Matrix::get(unsigned i, unsigned j) const {
-  assert(0 <= i && i < size_i);
-  assert(0 <= j && j < size_j);
-  int count_i =0, count_j=0, k, l;
-  for (k=0;k<size_i; k++)
-    {
-      if (lines.at(k))
-	{
-	  if (count_i == i)
-	    {
-	      break;
-	    } 
-	  else 
-	    {
-	      count_i++;
-	    }
-	}
-    }
-  for (l=0;l<size_i; l++)
-    {
-      if (rows.at(l))
-	{
-	  if (count_j == j)
-	    {
-	      break;
-	    } 
-	  else 
-	    {
-	      count_j++;
-	    }
-	}
-    }
+
+
+void Matrix::removeLine(unsigned i)
+{
+    assert(0 <= i && i < size_i);
+    
+    unsigned k = index_nth(lines, i);
+    lines[k] = false;
+    
+}
+void Matrix::removeRow(unsigned j)
+{    
+    assert(0 <= j && j < size_j);
+    
+    unsigned k = index_nth(rows, j);
+    rows[k] = false;
+}
+
+void Matrix::set(unsigned i, unsigned j, scalar_t x) 
+{
+    assert(0 <= i && i < size_i);
+    assert(0 <= j && j < size_j);
+    /* Looking for the actual "i,j" */
+    
+    unsigned k = index_nth(lines, i);
+    unsigned l = index_nth(rows, j);
   
-  return contents.at(index).at(k).at(l);
+    cout << k << ", " << l << endl;
+    contents[index][k][l] = x;
 }
 
-void Matrix::print() const {
-  for (unsigned i = 0; i < size_i; i++) {
-    for (unsigned j = 0; j < size_j; j++) {
-      cout << setprecision(2) << setw(8) << contents.at(index).at(i).at(j);
+Matrix::scalar_t Matrix::get(unsigned i, unsigned j) const 
+{
+    assert(0 <= i && i < size_i);
+    assert(0 <= j && j < size_j);
+    
+    unsigned k = index_nth(lines, i);
+    unsigned l = index_nth(rows, j);
+    
+    return contents[index][k][l];
+}
+
+void Matrix::print() const 
+{
+    for (unsigned i = 0; i < size_i; i++) 
+    {
+        if (lines[i])
+        for (unsigned j = 0; j < size_j; j++) 
+        {
+            if (rows[j])
+                cout << setprecision(2) << setw(8) << contents.at(index).at(i).at(j);
+        }
+        cout << endl;
     }
-    cout << endl;
-  }
-  cout << "___________________________" << endl;
+    cout << "___________________________" << endl;
 }
 
 /*****************************************************/
