@@ -1,7 +1,19 @@
-\documentclass[a4paper,11pt]{article}
-\usepackage{fullpage}
 
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{fullpage}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage[main=francais,english]{babel}%
+
+\usepackage{graphicx}%
+\usepackage{url}%
+
+\usepackage{mathpazo}%
+
+\parskip=0.5\baselineskip
+
+\sloppy
 
 %opening
 \title{PROG2: Inversion de matrices}
@@ -17,18 +29,57 @@
 
 \end{abstract}
 
+\section*{Introduction}
+
+
 \section{Implémentation de matrices}
 
-%% Blah blah...
+\subsection{Définition}
+
+On définit une classe $Matix$ possédant trois champs privés $size\_i$ contenant le nombre de lignes de la matrice, $size\_j$ donnat le nombre de colonnes et
+ $contents$ correspondant à la matrice des valeurs de la matrice à proprement dit.
+
+Le champ $contents$ contient un double vecteur de $scalar\_t$ pour représenter la matrice des valeurs.
+
+\subsection{Méthodes et fonctions}
+
+On définit les méthodes publiques suivantes:
+
+\begin{itemize}
+\item $get\_size\_i$ et $get\_size\_j$ permettent de consulter la valeur des $size\_i$ et $size\_j$
+\item $set(j,j,x)$ permet de remplacer la valeur de la matrice d'index $(i,j)$ par $x$.
+\item $get(i,j)$ permet de consulter la valeur de la matrice d'index $(i,j)$
+\item $print()$ affiche la matrice dans le terminal en formattant correctement l'affichage.
+\end{itemize}
+
+De plus, on définit en plus les fonctions suivantes:
+
+\begin{itemize}
+\item Des opérateurs $+,-$ qui effectuent la somme et la différence de deux matrices en effectuant un simple parcours de la matrice
+\item Un opérateur $*$ qui posséde deux sens différents: si le premier argument est un $scalar\_t$ alors on effectue juste la mutltiplication scalaire de la matrice comme pour les opérateurs précédents. Si c'est une matrice, on effectue une multiplication matricielle.
+\item Une fonction $transpose$ qui crée la matrice transposée par simple parcours des valeurs d ela matrice et création d'une nouvelle matrice.
+\item Une fonction $Id$ qui crée une matrice identité.
+\item Une fonction $submatrix$ qui crée explicitement la sous-matrice obtenue en retirant une ligne et colonne spécifiée. (voir section 1.3)
+\item Une fonction $determinant$ récursive quie calcule le déterminant par utilisation du dévellopement par ligne.
+\item Une fonction $inverse$ qui calcule la matrice inverse.
+\end{itemize}
 
 \subsection{Extraction de sous-matrice}
 
 Il est nécessaire d'extraire une sous-matrice en retirant les lignes d'indice $a$ et les colonnes d'indice $b$. 
 
 Ceci est fait en créant une matrice carrée de taille $n-1$, qu'on remplit par parcours de cette matrice en tirant parti du fait que l'expression
-($i$ >= a) renvoie 1 si $i \leq a$ ce qui permet d'engendrer un décalage de ligne/colonne quand nécessaire.
+($i \leq a$) renvoie 1 si $i \leq a$ ce qui permet d'engendrer un décalage de ligne/colonne quand nécessaire.
 
-\subsection{Temps de calculs}
+\subsection{Erreurs de calcul d'inverse}
+
+Le calcul de l'inverse est sujet à des erreurs d'arrondis. De fait, il est nécessaire de mesurer l'erreur commise.
+
+La mesure de l'erreur a été défini par la norme de $M\bullet M' - I_n$ où $M'$ est la matrice inverse calculée par le programme proposé.
+
+Pour $n \in \{10;20;\dots;100\}$ on génére 10 matrices aléatoires de taille $n$ et on récupére l'erreur moyenne.
+
+Les résultats sont consignés dans le graphe suivant.
 
 \section{Optimisation: implémentation des sous-matrices}
 
@@ -56,24 +107,40 @@ A l'origine, toutes les lignes et colonnes sont actives.
 \subsection{Redéfinition des méthodes de base}
 
 La plus grosse difficulté posé par cette construction est que l'accés à la valeur (i,j) de la matrice n'est plus direct: certaines lignes et colonnes sont ``désactivées''. 
-Pour remédier à cela, on crée deux méthodes get\_real\_i(int i) et get\_real\_j(j) qui font un parcours du vecteur de bits correspondant de maniére à trouver le ``vrai'' i/j.
+Pour remédier à cela, on crée une méthode $find\_index$ qui fait un parcours du vecteur de bits de maniére à trouver le ``vrai'' i/j.
 
-Cela se fait en déclarant un compteur count, puis en faisant une boucle sur une variable k telle qu'à chaque itération count augmente ssi le bit d'index k est positif. Quand count > i/j, on aréte la boucle
-et on récupére le k courant qui correspond à real\_i/j + 1.
-
+Cela se fait en déclarant un compteur count, puis en faisant une boucle sur une variable k telle qu'à chaque itération count augmente ssi le bit d'index k est positif. Quand count > index, on aréte la boucle
+et on récupére le k courant qui correspond à $real\_index$ + 1. 
 A partir de là, il devient très simple de redéfinir toutes le méthodes de base de Matrix en prenant soin de se rappeller que contents est maintenant un triple vecteur.
 
 \subsection{Création de sous-matrices}
 
 La création de sous-matrice devient très simple: on crée une copie de la matrice en question, puis on modifie les vecteurs rows et lines pour refléter le changement dans la matrice conssidéré.
 
+Cela présente le grand avantage de ne pas explicitement créer un nouveau double vectuer de valeurs pour la sous-matrice. Sachant que la fonction $determinant$ fait $n$! appels à la fonction $submatrix$ les économies en temps (et mémoire) sont substantielles
+
 
 \subsection{Comparaisons avec l'ancienne méthode}
+
+Nous avons annoncé à la partie précédente que cette nouvelle façon de procéder permet de faire des économies en temps de calcul.
+
+Pour vérifier cette affirmation, on a effectuée l'expérience suivante:
+
+Pour $n \in \{10;20;\dots;100\}$ on génére 10 matrices aléatoires de taille $n$ et on compare les temps d'exécutions de l'ancienne méthode et de la nouvelle.
+
+Les résultats sont consignés dans le graphe suivant.
+
 
 \subsection{Insuffisances}
 
 Cette méthode présente cependant un gros inconvénient: les sous-matrices ainsi déclarées ont un contenu directement liée à celui des matrices mères. Si on modifie leur contenu, on modifie aussi celui de la matrice mère. et vice-versa.
 
 Cela ne pose pas de probléme dans le projet proposé puisque l'application qui en est faite agit en place sur le probléme et ne modifie pas les valeurs des matrices.
+
+En réalité, cela vient du fait que ce qu'on a voulu faire à la base est d'éviter d'expliciter des sous-matrices qu'il n'était pas nécessaire d'expliciter puisqu'on ne faisait que consulter leur valeur. Si on veut pouvoir travailler sur ces sous-matries, il faudra définir une nouvelle méthode d'extraction de sous-matrices et on ne gagnera rien par rapport à la premiére façon de procéder.
+
+\section*{Conclusion}
+
+
 
 \end{document}
