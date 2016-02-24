@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.12.3)  11 FEB 2016 13:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.12.3)  24 FEB 2016 00:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2011/06/27>
 Babel <3.9f> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texmf/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texmf/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+(/usr/share/texmf/tex/latex/base/size11.clo
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -22,6 +22,10 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip43
 )
 (/usr/share/texmf/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
@@ -242,55 +246,48 @@ Now handling font encoding U ...
 )) (./Rapport.aux)
 \openout1 = `Rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 12.
+(Font)              <12> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 12.
+(Font)              <8> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 12.
+(Font)              <6> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 24.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 24.
+(Font)              <10.95> on input line 26.
+ [1
 
-Overfull \hbox (17.67456pt too wide) in paragraph at lines 29--29
-[]\OT1/cmr/bx/n/14.4 Optimisation: impl^^Sementation des sous-matrices 
- []
-
-[1
-
-{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Rapport.aux) ) 
+{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./Rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 441 strings out of 493315
- 4214 string characters out of 6145893
- 55393 words of memory out of 5000000
- 3951 multiletter control sequences out of 15000+600000
- 8194 words of font info for 29 fonts, out of 8000000 for 9000
+ 466 strings out of 493315
+ 4610 string characters out of 6145893
+ 57471 words of memory out of 5000000
+ 3973 multiletter control sequences out of 15000+600000
+ 8811 words of font info for 31 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 23i,7n,19p,169b,197s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/s
-hare/texmf/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/fonts/ty
-pe1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fonts/ty
-pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb>
-Output written on Rapport.pdf (1 page, 72398 bytes).
+ 23i,7n,19p,266b,197s stack positions out of 5000i,500n,10000p,200000b,80000s
+</u
+sr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf/font
+s/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fon
+ts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb>
+Output written on Rapport.pdf (2 pages, 84263 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 39 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

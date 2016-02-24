@@ -37,8 +37,6 @@ Jusqu'à maintenant, chaque matrice possédait un champ contents correspondant �
 
 Cela veut notament dire que lorsqu'on veut extraire une sous matrice, il fallait pour créer la nouvelle sous-matrice recréer presque l'integralité de ce champ contents.
 
-Ainsi, le coût en mémoire devenait très vite très important comme montré à la section précédente.
-
 Nous allons maintenant prédsenter une façon de ne pas recréer un champ de valeurs.
 
 \subsection{Définition de matrices par vecteurs de bits d'activité}
@@ -56,19 +54,10 @@ A l'origine, toutes les lignes et colonnes sont actives.
 \subsection{Redéfinition des méthodes de base}
 
 La plus grosse difficulté posé par cette construction est que l'accés à la valeur (i,j) de la matrice n'est plus direct: certaines lignes et colonnes sont ``désactivées''. 
-Pour remédier à cela, on crée deux méthodes get\_real\_i(int i) et get\_real\_j(j) qui font un parcours du vecteur de bits correspondant de maniére à trouver le ``vrai'' i/j.
-
-Cela se fait en déclarant un compteur count, puis en faisant une boucle sur une variable k telle qu'à chaque itération count augmente ssi le bit d'index k est positif. Quand count > i/j, on aréte la boucle
-et on récupére le k courant qui correspond à real\_i/j + 1.
-
-A partir de là, il devient très simple de redéfinir toutes le méthodes de base de Matrix en prenant soin de se rappeller que contents est maintenant un triple vecteur.
 
 \subsection{Création de sous-matrices}
 
 La création de sous-matrice devient très simple: on crée une copie de la matrice en question, puis on modifie les vecteurs rows et lines pour refléter le changement dans la matrice conssidéré.
-
-
-\subsection{Comparaisons avec l'ancienne méthode}
 
 \subsection{Insuffisances}
 
