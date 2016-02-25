@@ -1,4 +1,5 @@
 #include "main.hh"
+<<<<<<< HEAD
 #include <time.h>
 #include <cmath>
 #include <iostream>
@@ -10,6 +11,26 @@ using namespace std;
 
 string filename1 = "comparaison.data";
 string filename2 = "error.data";
+=======
+
+using namespace std;
+
+
+
+
+void test1(unsigned size)
+{
+    Matrix::random(size, size, -10.0, 10.).inverse();
+}
+
+
+void test2(unsigned size)
+{
+    Matrix M = Matrix::random(size, size, -10.0, 10.);
+    M.use_static(true);
+    M.inverse();
+}
+>>>>>>> 15dff321b0c8f0ae8d231c60ef7262dc58b265a7
 
 double mean(vector<double> v)
 {
@@ -34,6 +55,7 @@ double stdvar(vector<double> v)
 
 int main() 
 {    
+<<<<<<< HEAD
   ofstream ofs;
   ofs.open (filename1.c_str(), ofstream::out);
   assert(ofs.is_open());
@@ -53,11 +75,24 @@ int main()
   for (n=2;n<8;n++)
     {
       Matrix m = Matrix::Hilbert(n);
+=======
+    srand(time(NULL)); // random seed
+    
+    
+    Experiment exp1(test1);
+    Experiment exp2(test2);
+    
+    time_t begin, end;
+    
+    Matrix m = Matrix::Hilbert(5);    
+    cout << m.inverse() * m << m * m.inverse() << endl;
+>>>>>>> 15dff321b0c8f0ae8d231c60ef7262dc58b265a7
     
       err << n << "\t" << (m.inverse() * m - Matrix::Id((unsigned)n)).norm() << endl;
     }
     
     
+<<<<<<< HEAD
   ofstream log("log2.csv");
     
   cout << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
@@ -74,6 +109,41 @@ int main()
       vector<double> slow = vector<double>(max,0.0);
 	
       for(i = 0; i < max; i++)
+=======
+    ofstream log("log2.csv");
+    unsigned max = 42000;
+    
+    /*
+    for(unsigned n = 2; n < 10; n++)
+    {
+        
+        max /= n;
+        if (max < 1)
+            max = 1;
+        cout << "exp1 : " << exp1(max, n) << endl;
+        cout << "exp2 : " << exp2(max, n) << endl;
+    }
+    */
+    
+    
+    max = 42000;
+    
+    for(unsigned n = 2; n < 8; n++)
+    {
+        cout << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
+        log << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
+    
+        max /= n;
+        if (max < 1)
+            max = 1;
+        cout << "exp1 : " << exp1(max, n) << endl;
+        cout << "exp2 : " << exp2(max, n) << endl;
+        begin = clock();
+        
+	vector<double> slow = vector<double>(max,0.0);
+	
+        for(unsigned i = 0; i < max; i++)
+>>>>>>> 15dff321b0c8f0ae8d231c60ef7262dc58b265a7
         {
 	  Matrix M = Matrix::random(n, n, -10.0, 10.);
 	  Matrix M2(M.inverse());
@@ -91,7 +161,11 @@ int main()
       begin = clock();
         
 
+<<<<<<< HEAD
       for(i = 0; i < max; i++)
+=======
+        for(unsigned i = 0; i < max; i++)
+>>>>>>> 15dff321b0c8f0ae8d231c60ef7262dc58b265a7
         {
 	  Matrix M = Matrix::random(n, n, -10.0, 10.);
 	  M.use_static(true);
@@ -106,10 +180,13 @@ int main()
       cout << setw(8) << mean(fast) << ";" << stdvar(fast) << ";" << max << endl;
       log << setw(8) << mean(fast) << ";"  << stdvar(fast) << ";" << max << endl;
     }
+<<<<<<< HEAD
     
     
   ofs.close();
 
+=======
+>>>>>>> 15dff321b0c8f0ae8d231c60ef7262dc58b265a7
 
 
     

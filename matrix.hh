@@ -4,18 +4,18 @@
 #include <iostream>
 #include <iomanip>
 
-#include <string>
 #include <cmath>
 #include <cassert>
 #include <cstdlib>
-#include <ctime>
 
 
 using namespace std;
 
 
 
-
+// This class handles a matrix
+// Many common operations are defined, such as
+// transpose, inverse, determinant, norm...
 class Matrix 
 {
     public:
