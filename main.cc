@@ -47,7 +47,7 @@ int main()
     Experiment exp1(test1);
     Experiment exp2(test2);
     
-    
+    time_t begin, end;
     
     Matrix m = Matrix::Hilbert(5);    
     cout << m.inverse() * m << m * m.inverse() << endl;
@@ -55,7 +55,7 @@ int main()
     
     
     ofstream log("log2.csv");
-    int max = 42000;
+    unsigned max = 42000;
     
     /*
     for(unsigned n = 2; n < 10; n++)
@@ -86,7 +86,7 @@ int main()
         
 	vector<double> slow = vector<double>(max,0.0);
 	
-        for(i = 0; i < max; i++)
+        for(unsigned i = 0; i < max; i++)
         {
             Matrix M = Matrix::random(n, n, -10.0, 10.);
             Matrix M2(M.inverse());
@@ -105,7 +105,7 @@ int main()
         begin = clock();
         
 
-        for(i = 0; i < max; i++)
+        for(unsigned i = 0; i < max; i++)
         {
             Matrix M = Matrix::random(n, n, -10.0, 10.);
             M.use_static(true);
@@ -119,10 +119,6 @@ int main()
         cout << setw(8) << mean(fast) << ";" << stdvar(fast) << ";" << max << endl;
         log << setw(8) << mean(fast) << ";"  << stdvar(fast) << ";" << max << endl;
     }
-    
-    
-
-
 
 
     
