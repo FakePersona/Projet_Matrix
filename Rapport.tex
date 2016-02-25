@@ -60,7 +60,11 @@
 \maketitle
 
 \begin{abstract}
+  L'inversion de matrice est un probléme algorithmique posant certaines difficultées, comme les erreurs de calculs inévitables dans des cas pathologiques comme les matrices de Hilbert.
 
+  De plus, le calcul du déterminant par la méthode de Kramer engendre le calcul de beaucoup de sous-matrice, ce qui cause de gros problémes de mémoire pour l'implémentation naïve des matrices.
+
+  Nous proposons dans cet article une construction alternative du type matrice permettant d'éviter la construction explicite des sous-matrices et exposerons les diverses difficultées soulevées par cette construction.
 \end{abstract}
 
 \section{Implémentation de matrices}
@@ -187,7 +191,7 @@ Il est important de remarquer que notre implémentation à l'aide d'un vecteur s
 En effet, la déclaration de nouvelles matrices dans une boucle peut causer une augmentation définitive du champ static contents.
 
 \begin{lstlisting}
-for (i=0; i < 1000; i++)
+for (i=0; i < 10000; i++)
     Matrix M(10,10)
 \end{lstlisting}
 
@@ -199,6 +203,10 @@ Il est donc nécessaire de définir un moyen d'effacer des matrices de contents 
 
 Il a donc été crée un vecteur count qui repére pour chaque matrice de valeurs stockée le nombre de matrices s'y référant. A chaque fois qu'une matrice ou sous-matrice est crée, on incrémente le compteur correspondant. On surcharge le destructeur pour qu'il décrémente ce compteur.
 
+\begin{remarque}
+  Avec l'ancienne implémentation, la boucle proposée plus haut occupe quelques megaoctets de mémoire, alors que la nouvelle implémentation n'occupe que quelques kilos-octets.
+\end{remarque}
+
 \subsection{Insuffisances}
 
 Cette méthode présente cependant un gros inconvénient: les sous-matrices ainsi déclarées ont un contenu directement liée à celui des matrices mères. Si on modifie leur contenu, on modifie aussi celui de la matrice mère. et vice-versa.
@@ -209,6 +217,10 @@ En réalité, cela vient du fait que ce qu'on a voulu faire à la base est d'év
 
 \section*{Conclusion}
 
+Nous avons étudié la construction naturelle des matrices et avons exposé le probléme posé par les cas pathologiques de la méthode de Kramer.
 
+Afin d'éviter l'éceuil de l'accumulation de sous-matrices explicites, nouw avons défini un nouveau type de matrices composé de deux vecteurs d'activités donnant les lignes et colonnes actives référant à une matrice \texttt{static} commune à toutes les matrices de la classe.
+
+Les gains en temps de calcul sont confirmés par l'expérience menée, et une adaptation du destructeur de la classe permet d'économiser un espace mémoire consédérable. 
 
 \end{document}
