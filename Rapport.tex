@@ -104,9 +104,19 @@ Le calcul de l'inverse est sujet à des erreurs d'arrondis. De fait, il est néc
 
 La mesure de l'erreur a été défini par la norme de $M\bullet M' - I_n$ où $M'$ est la matrice inverse calculée par le programme proposé.
 
-Pour $n \in \{2;4;\dots;8\}$ on génère 100 matrices aléatoires de taille n et on récupère l'erreur moyenne.
+Pour $n \in \{2;3;\dots;7\}$ on génère les matrices aléatoires de Hilbert de taille n
 
 Les résultats sont consignés dans le graphe suivant.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{Error.png}
+  \caption{Erreurs pour les matrices de Hilbert}
+  \label{fig:phd}
+
+\end{figure}
+
 
 \section{Optimisation: implémentation des sous-matrices}
 
@@ -161,6 +171,15 @@ Pour vérifier cette affirmation, on a effectuée l'expérience suivante:
 Pour $n \in \{2;4;\dots;8\}$ on génère 100 matrices aléatoires de taille $n$ et on compare les temps d'exécution de l'ancienne méthode et de la nouvelle.
 
 Les résultats sont consignés dans le graphe suivant.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{Comparison.png}
+  \caption{Comparaison des deux méthodes}
+  \label{fig:phd}
+\end{figure}
+
 
 \subsection{Fuites de mémoire}
 

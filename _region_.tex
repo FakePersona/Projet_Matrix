@@ -1,0 +1,64 @@
+\message{ !name(Rapport.tex)}\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}%
+
+\usepackage{fullpage}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage[main=francais,english]{babel}%
+
+\usepackage{graphicx}%
+\usepackage{xspace}%
+\usepackage{float}
+
+\usepackage{url} \urlstyle{sf}%
+\DeclareUrlCommand\email{\urlstyle{sf}}%
+
+\usepackage{mathpazo}%
+\let\bfseriesaux=\bfseries%
+\renewcommand{\bfseries}{\sffamily\bfseriesaux}
+
+\newenvironment{keywords}%
+{\description\item[Mots-clés.]}%
+{\enddescription}
+
+
+\newenvironment{remarque}%
+{\description\item[Remarque.]\sl}%
+{\enddescription}
+
+\font\manual=manfnt
+\newcommand{\dbend}{{\manual\char127}}
+
+\newenvironment{attention}%
+{\description\item[\dbend]\sl}%
+{\enddescription}
+
+\usepackage{listings}%
+
+\lstset{%
+  basicstyle=\sffamily,%
+  columns=fullflexible,%
+  language=c,%
+  frame=lb,%
+  frameround=fftf,%
+}%
+
+\lstMakeShortInline{|}
+
+\parskip=0.5\baselineskip
+
+\sloppy
+
+%opening
+\title{PROG2: Inversion de matrices}
+\author{Rémi Hutin \and Rémy Sun}
+\date{26 février 2016}
+
+
+\begin{document}
+
+\message{ !name(Rapport.tex) !offset(74) }
+index
+\message{ !name(Rapport.tex) !offset(131) }
+
+\end{document}

@@ -1,0 +1,18 @@
+foo_data <- read.table("foo.data",header=T)
+foo_data
+
+png("foo.png")
+
+plot(foo_data)
+
+title(main="Foo", col.main="red", font.main=4)
+
+dev.off()
+
+png("graph.png")
+
+plot(foo_data)
+
+title(main="Foo", col.main="red", font.main=4)
+
+dev.off()
