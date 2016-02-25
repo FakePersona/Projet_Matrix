@@ -18,7 +18,6 @@ void test2(unsigned size)
     M.inverse();
 }
 
-
 double mean(vector<double> v)
 {
   double sum = 0.0;
@@ -58,6 +57,7 @@ int main()
     ofstream log("log2.csv");
     int max = 42000;
     
+    /*
     for(unsigned n = 2; n < 10; n++)
     {
         
@@ -67,9 +67,12 @@ int main()
         cout << "exp1 : " << exp1(max, n) << endl;
         cout << "exp2 : " << exp2(max, n) << endl;
     }
+    */
+    
     
     max = 42000;
-    for(unsigned n = 2; n < 10; n++)
+    
+    for(unsigned n = 2; n < 8; n++)
     {
         cout << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
         log << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
