@@ -15,7 +15,7 @@ using namespace std;
 vector<vector<vector<Matrix::scalar_t> > > Matrix::contents;
 vector<unsigned> Matrix::count;
 
-
+ 
 void Matrix::print_matrix(unsigned index)
 {
    // cout << "[" << contents.size() << "] ";

@@ -12,12 +12,20 @@ int main()
     int i;
     
     time_t begin, end;
-    int max;
+    int max = 42000;
     
-    for(n = 2; n < 9; n++)
+    
+    ofstream log("log.csv");
+    
+    cout << "n;inverse;inverse2;test(s)" << endl;
+    log << "n;inverse;inverse2;test(s)" << endl;
+    
+    for(n = 2; n < 10; n++)
     {
-        cout << "n = " << n << " ; \t" << flush;
-        max = 2000/(n*n*n);
+        cout << "" << n << ";" << flush;
+        max /= n;
+        if (max < 1)
+            max = 1;
         begin = clock();
         for(i = 0; i < max; i++)
         {
@@ -26,7 +34,8 @@ int main()
             Matrix M2(inverse(M));
         }
         end = clock();
-        cout << setw(8) << (double)(end - begin) / CLOCKS_PER_SEC / max << "\t;\t" << flush;
+        cout << setw(8) << (double)(end - begin) / CLOCKS_PER_SEC / max << ";" << flush;
+        log << setw(8) << (double)(end - begin) / CLOCKS_PER_SEC / max << ";" << flush;
         begin = clock();
         for(i = 0; i < max; i++)
         {
@@ -35,7 +44,8 @@ int main()
             Matrix M2(inverse2(M));
         }
         end = clock();
-        cout << setw(8) << (double)(end - begin) / CLOCKS_PER_SEC / max << endl;
+        cout << setw(8) << (double)(end - begin) / CLOCKS_PER_SEC / max << ";" << max << endl;
+        log << setw(8) << (double)(end - begin) / CLOCKS_PER_SEC / max << ";" << max << endl;
     }
     
     
