@@ -12,6 +12,7 @@ vector<unsigned> Matrix::count;
 /*      constructors and destructor       */
 /******************************************/
 
+// creates an empty matrix of size n*p
 Matrix::Matrix(unsigned n, unsigned p) 
 {
     size_i = n;
@@ -25,25 +26,30 @@ Matrix::Matrix(unsigned n, unsigned p)
     use_static_opt = false;
     
     index = 0;
+    
+    // find the first empty matrix in contents
     while (index < contents.size() && count[index] > 0)
         index++;
     
+    
+    // if all matrices are used, we create a new one
     if(index == contents.size())
     {
         contents.push_back( vector<vector<scalar_t> >(size_i) );
         count.push_back(1);
     }
-    else
+    else // if one matrix is not used anymore, we replace it
     {
         contents[index] = vector<vector<scalar_t> >(size_i);
         count[index] = 1;
     }
         
-    for (unsigned i = 0; i < size_i; i++)
-        contents[index][i] = vector<scalar_t>(size_j, 0.0); // Initialization to 0.0
+    for (unsigned i = 0; i < size_i; i++) // Initialization to 0.0
+        contents[index][i] = vector<scalar_t>(size_j, 0.0); 
     
 }
 
+// copy constructor
 Matrix::Matrix(const Matrix& m)  
 {
     size_i = m.size_i;
@@ -56,6 +62,9 @@ Matrix::Matrix(const Matrix& m)
     count[index]++;
 }
 
+// destructor
+// clears the matrix in the vector contents if 
+// it is not used anymore.
 Matrix::~Matrix()
 {
     count[index]--;
@@ -70,6 +79,7 @@ Matrix::~Matrix()
 /*                  misc                  */
 /******************************************/
 
+// returns (-1)^i
 static int toggle(unsigned i) //Note it is static!
 {   
     if (i % 2 == 0)
@@ -78,6 +88,7 @@ static int toggle(unsigned i) //Note it is static!
         return -1;
 }
 
+// returns the index of the n-th positive value of vect
 static unsigned index_nth(vector<bool> vect, unsigned n) 
 {    
     unsigned count = 0, k;
@@ -99,6 +110,8 @@ void Matrix::print(ostream &f) const
     f << "___________________________" << endl;
 }
 
+// remove the line i by setting the
+// i-th active line to false in lines
 void Matrix::remove_line(unsigned i)
 {
     assert(0 <= i && i < size_i);
@@ -109,6 +122,8 @@ void Matrix::remove_line(unsigned i)
     size_i--;    
 }
 
+// remove the row i by setting the
+// i-th active row to false in rows
 void Matrix::remove_row(unsigned j)
 {    
     assert(0 <= j && j < size_j);
@@ -158,6 +173,9 @@ Matrix::scalar_t Matrix::get(unsigned i, unsigned j) const
     return contents[index][k][l];
 }
 
+// set the option use_static_opt
+// depending on the value of use_static_opt, the optimization 
+// using the static vector will or will not be used
 void Matrix::use_static(bool b)
 {
     use_static_opt = b;
@@ -169,6 +187,7 @@ void Matrix::use_static(bool b)
 /*           operation methods            */
 /******************************************/
 
+// computes the infinity norm of the matrix
 double Matrix::norm() const
 {
     scalar_t n = 0.0;
@@ -185,6 +204,7 @@ double Matrix::norm() const
     return n;
 }
 
+// returns the transpose of the matrix
 Matrix Matrix::transpose() const
 {
     Matrix M(size_j, size_i);
@@ -196,6 +216,9 @@ Matrix Matrix::transpose() const
     return M;
 }
 
+// returns the submatrix obtained by deleting line a and row b.
+// depending on the value of use_static_opt, the optimization 
+// using the static vector will or will not be used
 Matrix Matrix::submatrix(unsigned a, unsigned b) const
 {
     assert (0 <= a && a < size_i);
@@ -211,7 +234,10 @@ Matrix Matrix::submatrix(unsigned a, unsigned b) const
         {
             for (unsigned j = 0; j < size_j - 1; j++) 
             {
-                scalar_t x = get(i + (i >= a), j + (j >= b));
+                // (i >= a) and (j >= b) and create a shift
+                // that will allow us to pick the right value
+                // in the original matrix
+                scalar_t x = get(i + (i >= a), j + (j >= b));                  
                 M.set(i, j, x);
             }
         }
@@ -228,6 +254,7 @@ Matrix Matrix::submatrix(unsigned a, unsigned b) const
     }
 }
 
+// returns the determinant of the matrix
 Matrix::scalar_t Matrix::determinant() const 
 {
     assert(size_i == size_j);
@@ -245,6 +272,8 @@ Matrix::scalar_t Matrix::determinant() const
     return s;
 }
 
+// Returns the inverse of the matrix
+// Exit the programme if the matrix isn't invertible
 Matrix Matrix::inverse() const
 {
     assert(size_i == size_j);
@@ -258,14 +287,14 @@ Matrix Matrix::inverse() const
     }
 
     Matrix cofactors(size, size);
-  //  cofactors.use_static_opt = use_static_opt;
+    cofactors.use_static_opt = use_static_opt;
 
     for (unsigned i = 0; i < size; i++) 
     {
         for (unsigned j = 0; j < size; j++) 
         {
             Matrix M = submatrix(i, j);
-       //     M.use_static_opt = use_static_opt;
+            M.use_static_opt = use_static_opt;
 
             scalar_t x = M.determinant();
             scalar_t y =  toggle(i+j) * (x / det);
@@ -283,7 +312,8 @@ Matrix Matrix::inverse() const
 /*            static methods              */
 /******************************************/
 
-Matrix Matrix::Id(unsigned n) // static method
+// returns Identity matrix of size n
+Matrix Matrix::Id(unsigned n)
 {
     Matrix M(n, n);
     for (unsigned i = 0; i < n; i++) 
@@ -292,7 +322,8 @@ Matrix Matrix::Id(unsigned n) // static method
     return M;
 }
 
-Matrix Matrix::Hilbert(unsigned n) // static method
+// returns Hilbert matrix of size n
+Matrix Matrix::Hilbert(unsigned n)
 {
     Matrix M(n, n);
     for (unsigned i = 0; i < n; i++) 
@@ -302,7 +333,9 @@ Matrix Matrix::Hilbert(unsigned n) // static method
     return M;
 }
 
-Matrix Matrix::random(unsigned n, unsigned p, scalar_t min, scalar_t max) // static method 
+// return a random of size n*p.
+// Every number are chosen randomly in [min, max]
+Matrix Matrix::random(unsigned n, unsigned p, scalar_t min, scalar_t max)
 {
     assert(1 <= n);
     assert(1 <= p);
@@ -310,8 +343,13 @@ Matrix Matrix::random(unsigned n, unsigned p, scalar_t min, scalar_t max) // sta
     
     Matrix M(n, p);
     for (unsigned i = 0; i < n; i++) 
+    {
         for (unsigned j = 0; j < p; j++) 
-            M.set(i, j, min + (scalar_t) (rand()) /( (scalar_t) (RAND_MAX/(max-min))));
+        {
+            scalar_t x = min + (scalar_t) (rand()) / ((RAND_MAX/(max-min)));
+            M.set(i, j, x);
+        }
+    }
     
     return M;
 }
@@ -328,6 +366,8 @@ ostream &operator<<( ostream &f, Matrix const& M)
     return f;
 }
 
+
+// adds two matrices
 Matrix operator+(const Matrix& M1, const Matrix& M2) 
 {
     assert(M1.get_size_i() == M2.get_size_i());
@@ -348,6 +388,7 @@ Matrix operator+(const Matrix& M1, const Matrix& M2)
     return M;
 }
 
+// substracts two matrices
 Matrix operator-(const Matrix& M1, const Matrix& M2) 
 {
     assert(M1.get_size_i() == M2.get_size_i());
@@ -368,6 +409,7 @@ Matrix operator-(const Matrix& M1, const Matrix& M2)
     return M;
 }
 
+// multiplies a scalar and a matrix
 Matrix operator*(Matrix::scalar_t a, const Matrix& M1) 
 {
     unsigned size_i = M1.get_size_i();
@@ -386,6 +428,7 @@ Matrix operator*(Matrix::scalar_t a, const Matrix& M1)
     return M;
 }
 
+// multiplies two matrices
 Matrix operator*(const Matrix& M1, const Matrix& M2) 
 {
     assert(M1.get_size_j() == M2.get_size_i());
