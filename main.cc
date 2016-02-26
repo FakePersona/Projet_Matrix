@@ -45,7 +45,7 @@ double test_hilbert(unsigned size)
 
 
 
-int main() 
+int main(int argc, char* argv[]) 
 {    
     Experiment exp1(test_inv1);
     Experiment exp2(test_inv2);
@@ -55,7 +55,7 @@ int main()
     ofstream ofs_inv2("inv2.data");
     ofstream ofs_hilbert("hilbert.data");
     
-    assert(ofs_inv1.is_open() && ofs_inv2.is_open() && ofs_hilbert.is_open());    
+    assert(ofs_inv1.is_open() && ofs_inv2.is_open() && ofs_hilbert.is_open());
     
     ofs_inv1 << "n\tmean\tsd" << endl;
     ofs_inv2 << "n\tmean\tsd" << endl;
