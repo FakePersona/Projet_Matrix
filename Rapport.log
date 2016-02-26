@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.12.3)  25 FEB 2016 22:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.12.3)  26 FEB 2016 00:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -370,7 +370,14 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
 Package Listings Info: Made | a short reference for \lstinline on input line 46
 .
- (./Rapport.aux)
+ (./Rapport.aux
+
+LaTeX Warning: Label `fig:phd' multiply defined.
+
+
+LaTeX Warning: Label `fig:phd' multiply defined.
+
+)
 \openout1 = `Rapport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
@@ -386,8 +393,7 @@ LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Try loading font information for T1+ppl on input line 58.
-
-(/usr/share/texmf/tex/latex/psnfss/t1ppl.fd
+ (/usr/share/texmf/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
 LaTeX Info: Redefining \degres on input line 58.
@@ -491,12 +497,12 @@ LaTeX Font Info:    Try loading font information for T1+cmss on input line 62.
 (/usr/share/texmf/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 70.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 74.
 
 (/usr/share/texmf/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 1622) in paragraph at lines 81--82
+Underfull \hbox (badness 1622) in paragraph at lines 85--86
 []\T1/cmtt/m/n/10.95 set(j,j,x) \T1/ppl/m/n/10.95 per-met de rem-pla-cer la va-
 leur d'in-dice \T1/cmtt/m/n/10.95 (i,j) \T1/ppl/m/n/10.95 dans la ma-trice par
  []
@@ -504,39 +510,55 @@ leur d'in-dice \T1/cmtt/m/n/10.95 (i,j) \T1/ppl/m/n/10.95 dans la ma-trice par
 [1
 
 {/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 1210) in paragraph at lines 118--119
+<Error.png, id=11, 481.8pt x 481.8pt>
+File: Error.png Graphic file (type png)
+ <use Error.png>
+Package pdftex.def Info: Error.png used on input line 118.
+(pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
+ [2 <./Error.png (PNG copy)>]
+Underfull \hbox (badness 1210) in paragraph at lines 132--133
 []\T1/ppl/m/n/10.95 Nous al-lons main-te-nant pré-sen-ter une fa-çon d'évi-ter 
 à avoir à ex-pli-ci-ter les sous-
  []
 
-<matimpli.png, id=11, 494.44725pt x 377.0085pt>
+<matimpli.png, id=17, 494.44725pt x 377.0085pt>
 File: matimpli.png Graphic file (type png)
  <use matimpli.png>
-Package pdftex.def Info: matimpli.png used on input line 128.
+Package pdftex.def Info: matimpli.png used on input line 142.
 (pdftex.def)             Requested size: 247.22302pt x 188.50378pt.
- [2] [3 <./matimpli.png>] [4] (./Rapport.aux) ) 
+ [3 <./matimpli.png>] <Comparison.png, id=23, 481.8pt x 481.8pt>
+File: Comparison.png Graphic file (type png)
+ <use Comparison.png>
+Package pdftex.def Info: Comparison.png used on input line 182.
+(pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
+
+[4] [5 <./Comparison.png (PNG copy)>] [6] (./Rapport.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4956 strings out of 493315
- 65479 string characters out of 6145893
- 144531 words of memory out of 5000000
- 8285 multiletter control sequences out of 15000+600000
- 35935 words of font info for 77 fonts, out of 8000000 for 9000
+ 4970 strings out of 493315
+ 65669 string characters out of 6145893
+ 145531 words of memory out of 5000000
+ 8294 multiletter control sequences out of 15000+600000
+ 38287 words of font info for 80 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,6n,49p,472b,1096s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvip
-s/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</usr/
-share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/t
-ype1/public/amsfonts/latxfont/lcircle1.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfss1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1000.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1095.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfsx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pf
-b></usr/share/texmf/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf/fonts
-/type1/urw/palatino/uplri8a.pfb>
-Output written on Rapport.pdf (4 pages, 155464 bytes).
+{/usr/share/texmf/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvi
+ps/cm-super/cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb></
+usr/share/texmf/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf/font
+s/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf/fonts/type1/public/cm-su
+per/sfsx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1200.pfb></u
+sr/share/texmf/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texmf/fonts
+/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/urw/palatino/
+uplr8a.pfb></usr/share/texmf/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/te
+xmf/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on Rapport.pdf (6 pages, 194687 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 74 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
