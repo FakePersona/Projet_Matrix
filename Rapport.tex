@@ -60,7 +60,7 @@
 \maketitle
 
 \begin{abstract}
-  L'inversion de matrice est un probléme algorithmique posant certaines difficultées, comme les erreurs de calculs dans des cas pathologiques comme les matrices de Hilbert.
+  L'inversion de matrice est un problème algorithmique posant certaines difficultés, comme les erreurs de calculs dans des cas pathologiques comme les matrices de Hilbert.
   De plus, le calcul du déterminant par la méthode de Kramer engendre le calcul de beaucoup de sous-matrices, ce qui cause de gros problèmes de mémoire pour l'implémentation naïve des matrices.
 
   Nous proposons dans cet article une construction alternative du type matrice permettant d'éviter la construction explicite des sous-matrices et exposerons les diverses difficultées soulevées par cette construction.
@@ -81,7 +81,7 @@ On définit les méthodes publiques suivantes:
 
 \begin{itemize}
 \item \texttt{get\_size\_i} et \texttt{get\_size\_j} permettent de consulter la valeur de \texttt{size\_i} et \texttt{size\_j}
-\item \texttt{set(j,j,x)} permet de remplacer la valeur d'indice \texttt{(i,j)} dans la matrice par \texttt{x}. \texttt{get(i,j)} permet de consulter la valeur d'indice\texttt{(i,j)} dans la matrice. \texttt{print()} affiche la matrice dans le terminal en formattant correctement l'affichage.
+\item \texttt{set(j,j,x)} permet de remplacer la valeur d'indice \texttt{(i,j)} dans la matrice par \texttt{x}. \texttt{get(i,j)} permet de consulter la valeur d'indice\texttt{(i,j)} dans la matrice. \texttt{print()} affiche la matrice dans le terminal en formatant correctement l'affichage.
 \end{itemize}
 
 De plus, on définit les fonctions suivantes:
@@ -106,7 +106,7 @@ Le calcul de l'inverse est sujet à des erreurs d'arrondis. De fait, il est néc
 
 La mesure de l'erreur a été définie par la norme infinie de $M\times M' - I_n$ ou $M'\times M - I_n$ où $M'$ est la matrice inverse calculée par le programme proposé.
 
-Pour $n \in \{2;3;\dots;9\}$ on génère les matrices de Hilbert de taille $n$ et on calcule l'erreur commise. (Voir figure 1) L'étude du cas des matrices de Hilbert est intéressante car c'est un exemple de matrices mal conditionnées pour la méthode Kramer.
+Pour $n \in \{2;3;\dots;9\}$ on génère les matrices de Hilbert de taille $n$ et on calcule l'erreur commise. (Voir figure 1) L'étude du cas des matrices de Hilbert est intéressante car c'est un exemple de matrices mal conditionnées pour la méthode de Kramer.
 
 
 \begin{figure}
@@ -149,7 +149,7 @@ De plus, pour chaque matrice, on crée deux vecteurs \texttt{lines} et \texttt{r
 La plus grosse difficulté posée par cette construction est que l'accès à la valeur \texttt{(i,j)} de la matrice n'est plus direct: certaines lignes et colonnes sont ``désactivées''. 
 Pour remédier à cela, on crée une fonction \texttt{find\_nth} qui retourne la n-ième valeur non nulle d'un vecteur de booléens.
 
-A partir de là, il devient très simple de redéfinir toutes les méthodes de base de Matrix en prenant soin de se rappeler que contents est maintenant un triple vecteur.
+A partir de là, il devient très simple de redéfinir toutes les méthodes de base de Matrix en prenant soin de se rappeler que \texttt{contents} est maintenant un triple vecteur.
 
 \subsection{Copie de matrice}
 
@@ -159,7 +159,7 @@ Notre surcharge du constructeur de copie de la classe \texttt{Matrix}  ne copie 
 
 La création de sous-matrice devient très simple: on crée une copie de la matrice en question, puis on modifie les vecteurs \texttt{rows} et \texttt{lines} pour refléter le changement dans la matrice considérée.
 
-Cela présente le grand avantage de ne pas explicitement créer un nouveau double vecteur de valeurs pour la sous-matrice. Sachant que la fonction determinant fait $n!$ appels à la fonction submatrix les économies en temps (et mémoire) sont substantielles
+Cela présente le grand avantage de ne pas explicitement créer un nouveau double vecteur de valeurs pour la sous-matrice. Sachant que la fonction determinant fait $n!$ appels à la fonction submatrix les économies en temps (et mémoire) sont substantielles.
 
 
 \subsection{Comparaisons avec l'ancienne méthode}
@@ -199,18 +199,18 @@ Il est donc nécessaire de définir un moyen d'effacer des matrices de \texttt{c
 On a créé un vecteur \texttt{count} qui repère pour chaque matrice de valeurs stockée le nombre de matrices s'y référant. A chaque fois qu'une matrice ou sous-matrice est créée, on incrémente le compteur correspondant. On surcharge le destructeur pour qu'il décrémente ce compteur. Si le compteur atteint 0, on libère l'espace dans le vecteur.
 
 \begin{remarque}
-Avec l'ancienne implémentation, la boucle proposée plus haut occupe quelques megaoctets de mémoire, alors que la nouvelle implémentation n'occupe que quelques kilos-octets.
+Avec l'ancienne implémentation, la boucle proposée plus haut occupe plusieurs méga-octets de mémoire, alors que la nouvelle implémentation n'occupe que quelques kilo-octets.
 \end{remarque}
 
 \subsection{Insuffisances}
 
-Cette méthode présente cependant un gros inconvénient: les sous-matrices ainsi déclarées ont un contenu directement lié à celui des matrices mères. Si on modifie leur contenu, on modifie aussi celui de la matrice mère. et vice-versa.
+Cette méthode présente cependant un gros inconvénient: les sous-matrices ainsi déclarées ont un contenu directement lié à celui des matrices mères. Si on modifie leur contenu, on modifie aussi celui de la matrice mère, et vice-versa.
 
 Cela ne pose pas de problème dans le projet proposé puisque l'application qui en est faite agit en place sur le problème et ne modifie pas les valeurs des matrices.
 
 \section*{Conclusion}
 
-Nous avons étudié la construction naturelle des matrices et avons exposé le probléme posé par les cas pathologiques de la méthode de Kramer.
+Nous avons étudié la construction naturelle des matrices et avons exposé le problème posé par les cas pathologiques de la méthode de Kramer.
 
 Afin d'éviter l'éceuil de l'accumulation de sous-matrices explicites, nous avons défini un nouveau type de matrices composé de deux vecteurs d'activités donnant les lignes et colonnes actives référant à une matrice \texttt{static} commune à toutes les matrices de la classe.
 
