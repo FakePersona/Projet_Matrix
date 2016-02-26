@@ -54,6 +54,8 @@ double Experiment::get_sd() const
 // It returns a const reference to the object itself.
 const Experiment& Experiment::operator()(unsigned nb_, unsigned param_)
 {
+    assert(fct != NULL);
+    
     nb = nb_;
     param = param_;
     
@@ -80,11 +82,7 @@ const Experiment& Experiment::operator()(unsigned nb_, unsigned param_)
 
 void Experiment::print(ostream &f) const
 {
-    f << param << " ; " <<
-         nb << " ; " <<
-         mean << " ; " <<
-         var << " ; " <<
-         sd;
+    f << param << "\t" << mean << "\t" << sd;
 }
 
 ostream &operator<<( ostream &f, Experiment const& exp)

@@ -15,7 +15,7 @@ double time_diff(time_t t1, time_t t2)
 }
 
 
-double test1(unsigned size)
+double test_inv1(unsigned size)
 {
     time_t t1 = clock();
     Matrix<double>::random(size, size, -10.0, 10.).inverse();
@@ -23,7 +23,7 @@ double test1(unsigned size)
     return time_diff(t1, clock());
 }
 
-double test2(unsigned size)
+double test_inv2(unsigned size)
 {
     time_t t1 = clock();
 
@@ -34,121 +34,51 @@ double test2(unsigned size)
     return time_diff(t1, clock());
 }
 
-double test3(unsigned size)
+double test_hilbert(unsigned size)
 {
     Matrix<double> M = Matrix<double>::Hilbert(size);
     Matrix<double> MM = M.inverse();
-    Matrix<double> E = (M*MM);
-
-    cout << E << endl;
+    Matrix<double> E = (M*MM - Matrix<double>::Id(size));
     
     return E.norm();
 }
 
 
 
-double mean(vector<double> v)
-{
-  double sum = 0.0;
-  unsigned i;
-  for (i=0;i<v.size();i++)
-    sum += v.at(i);
-  return sum / (double)v.size();
-}
-
-double stdvar(vector<double> v)
-{
-  double sum = 0.0;
-  unsigned i;
-  for (i=0;i< v.size();i++)
-    {
-      double avg= mean(v);
-      sum += (v.at(i) - avg)*(v.at(i) - avg);
-    }
-  return sqrt(sum / (double)v.size());
-}
-
 int main() 
 {    
-  ofstream ofs;
-  ofs.open (filename1.c_str(), ofstream::out);
-  assert(ofs.is_open());
-  ofs << "n" << "\t" << "Time" << endl;
-
-  ofstream err;
-  err.open (filename2.c_str(), ofstream::out);
-  assert(err.is_open());
-  
-  int n;
-  int i;
-  time_t begin, end;
-  int max = 42000;
-  
-  srand(time(NULL));
-  
-  for (n=2;n<8;n++)
-    {
-      Matrix<double> m = Matrix<double>::Hilbert(n);
+    Experiment exp1(test_inv1);
+    Experiment exp2(test_inv2);
+    Experiment exp3(test_hilbert);
     
-      err << n << "\t" << (m.inverse() * m - Matrix<double>::Id((unsigned)n)).norm() << endl;
+    ofstream ofs_inv1("inv1.data");
+    ofstream ofs_inv2("inv2.data");
+    ofstream ofs_hilbert("hilbert.data");
+    
+    assert(ofs_inv1.is_open() && ofs_inv2.is_open() && ofs_hilbert.is_open());    
+    
+    ofs_inv1 << "n\tmean\tsd" << endl;
+    ofs_inv2 << "n\tmean\tsd" << endl;
+    ofs_hilbert << "n\tmean\tsd" << endl;
+    
+    unsigned nb = 42000;
+    
+    for (unsigned i = 2; i < 7; i++)
+    {        
+        nb /= i;
+        if (nb < 1)
+            nb = 1;
+        
+        ofs_inv1 << exp1(nb, i) << endl;
+        ofs_inv2 << exp2(nb, i) << endl;
+        ofs_hilbert << exp3(nb, i) << endl;
     }
     
-    
-  ofstream log("log2.csv");
-    
-  cout << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
-  log << "n;inverse;stdvar;inverse2;stdvar2;test(s)" << endl;
-    
-  for(n = 2; n < 8; n++)
-    {
-      cout << n << ";" << flush;
-      max /= n;
-      if (max < 1)
-	max = 1;
-      begin = clock();
-      
-      vector<double> slow = vector<double>(max,0.0);
-	
-      for(i = 0; i < max; i++)
-        {
-	  Matrix<double> M = Matrix<double>::random(n, n, -10.0, 10.);
-	  Matrix<double> M2(M.inverse());
-	  end = clock();
-	  slow.at(i) = (double)(end - begin) / CLOCKS_PER_SEC;
-	  begin = end;	  
-        }
-      
-      ofs << n << "\t" << mean(slow) << endl;
-      cout << setw(8) << mean(slow) << ";" << stdvar(slow) << ";" << flush;
-      log << setw(8) << mean(slow) << ";"  << stdvar(slow) << ";" << flush;
-      
-      vector<double> fast = vector<double>(max,0.0);        
-      
-      begin = clock();
-        
-
-      for(i = 0; i < max; i++)
-        {
-	  Matrix<double> M = Matrix<double>::random(n, n, -10.0, 10.);
-	  M.use_static(true);
-	  Matrix<double> M2(M.inverse());
-	  end = clock();
-	  fast.at(i) = (double)(end - begin) / CLOCKS_PER_SEC;
-	  begin = end;
-        }
-        
-        
-      ofs << n << "\t" << mean(fast) << endl;
-      cout << setw(8) << mean(fast) << ";" << stdvar(fast) << ";" << max << endl;
-      log << setw(8) << mean(fast) << ";"  << stdvar(fast) << ";" << max << endl;
-    }
-    
-    
-  ofs.close();
-
-
-
+    ofs_inv1.close();
+    ofs_inv2.close();
+    ofs_hilbert.close();
     
     return 0;
+    
 }
  

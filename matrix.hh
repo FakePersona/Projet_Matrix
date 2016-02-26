@@ -590,5 +590,3 @@ Matrix<T> operator*(const Matrix<T>& M1, const Matrix<T>& M2)
 
     return M;
 }
-
-
