@@ -3,7 +3,7 @@ comparaison_data
 
 png("Comparison.png")
 
-plot(comparaison_data)
+plot(comparaison_data, log="y")
 
 title(main="Comparaison", col.main="red", font.main=4)
 
@@ -14,7 +14,7 @@ error_data
 
 png("Error.png")
 
-plot(error_data)
+plot(error_data, log="y")
 
 title(main="Erreurs", col.main="red", font.main=4)
 

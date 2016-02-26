@@ -3,7 +3,6 @@
 using namespace std;
 
 
-
 Experiment::Experiment()
 {
     fct = NULL;
@@ -49,9 +48,10 @@ double Experiment::get_sd() const
     return sd;
 }
 
-// executes the function fct nb times, using param value,
+// Executes the function fct nb times, using param value,
 // and computes mean value, variance, and standard deviation
-// of the values returned by fct
+// of the values returned by fct.
+// It returns a const reference to the object itself.
 const Experiment& Experiment::operator()(unsigned nb_, unsigned param_)
 {
     nb = nb_;

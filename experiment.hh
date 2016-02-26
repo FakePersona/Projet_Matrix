@@ -7,7 +7,6 @@
 using namespace std;
 
 
-
 // This class handles an experiment
 // It uses a function, which will be called multiple times
 // Then, mean value, variance and standard deviation will be computed
