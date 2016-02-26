@@ -51,31 +51,28 @@ int main()
     Experiment exp2(test_inv2);
     Experiment exp3(test_hilbert);
     
-    ofstream ofs_inv1("inv1.data");
-    ofstream ofs_inv2("inv2.data");
+    ofstream ofs_inv("inv.data");
     ofstream ofs_hilbert("hilbert.data");
     
-    assert(ofs_inv1.is_open() && ofs_inv2.is_open() && ofs_hilbert.is_open());    
+    assert(ofs_inv.is_open() && ofs_hilbert.is_open());    
     
-    ofs_inv1 << "n\tmean\tsd" << endl;
-    ofs_inv2 << "n\tmean\tsd" << endl;
+    ofs_inv << "n\tmean\tsd" << endl;
     ofs_hilbert << "n\tmean\tsd" << endl;
     
     unsigned nb = 42000;
     
-    for (unsigned i = 2; i < 7; i++)
+    for (unsigned i = 2; i < 9; i++)
     {        
         nb /= i;
         if (nb < 1)
             nb = 1;
         
-        ofs_inv1 << exp1(nb, i) << endl;
-        ofs_inv2 << exp2(nb, i) << endl;
+        ofs_inv << exp1(nb, i) << endl;
+        ofs_inv << exp2(nb, i) << endl;
         ofs_hilbert << exp3(nb, i) << endl;
     }
     
-    ofs_inv1.close();
-    ofs_inv2.close();
+    ofs_inv.close();
     ofs_hilbert.close();
     
     return 0;

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.12.3)  26 FEB 2016 13:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.12.3)  26 FEB 2016 22:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -510,27 +510,27 @@ File: Error.png Graphic file (type png)
 Package pdftex.def Info: Error.png used on input line 114.
 (pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
 
-[2 <./Error.png (PNG copy)>] <matimpli.png, id=18, 824.07875pt x 628.3475pt>
+[2 <./Error.png (PNG copy)>] <matimpli.png, id=18, 494.44725pt x 377.0085pt>
 File: matimpli.png Graphic file (type png)
 
 <use matimpli.png>
 Package pdftex.def Info: matimpli.png used on input line 137.
-(pdftex.def)             Requested size: 412.03836pt x 314.17297pt.
+(pdftex.def)             Requested size: 247.22302pt x 188.50378pt.
  [3 <./matimpli.png>]
-<Comparison.png, id=24, 481.8pt x 481.8pt>
-File: Comparison.png Graphic file (type png)
- <use Comparison.png>
-Package pdftex.def Info: Comparison.png used on input line 176.
+<Comparaison.png, id=24, 481.8pt x 481.8pt>
+File: Comparaison.png Graphic file (type png)
+ <use Comparaison.png>
+Package pdftex.def Info: Comparaison.png used on input line 176.
 (pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
- [4] [5 <./Comparison.png (PNG copy)>] (./Rapport.aux)
+ [4 <./Comparaison.png>] [5] (./Rapport.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  4971 strings out of 493315
- 65674 string characters out of 6145893
- 145531 words of memory out of 5000000
+ 65679 string characters out of 6145893
+ 144531 words of memory out of 5000000
  8294 multiletter control sequences out of 15000+600000
  38587 words of font info for 81 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -545,9 +545,9 @@ sr/share/texmf/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texmf/fonts
 /type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/urw/palatino/
 uplr8a.pfb></usr/share/texmf/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/te
 xmf/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Rapport.pdf (5 pages, 193976 bytes).
+Output written on Rapport.pdf (5 pages, 188934 bytes).
 PDF statistics:
- 71 PDF objects out of 1000 (max. 8388607)
+ 72 PDF objects out of 1000 (max. 8388607)
  48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
