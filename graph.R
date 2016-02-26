@@ -3,9 +3,10 @@ comparaison_data
 
 png("Comparison.png")
 
-plot(comparaison_data, log="y")
+boxplot(comparaison_data, log="y")
 
 title(main="Comparaison", col.main="red", font.main=4)
+
 
 dev.off()
 
