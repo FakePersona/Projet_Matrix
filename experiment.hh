@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <ctime>
 #include <cmath>
 
 using namespace std;
@@ -11,17 +10,16 @@ using namespace std;
 
 // This class handles an experiment
 // It uses a function, which will be called multiple times
-// Then, mean value, variance and standard deviation 
-// of execution time will be computed
+// Then, mean value, variance and standard deviation will be computed
 class Experiment
 {
     public:
         Experiment();
-        Experiment(void (*fct_)(unsigned));
+        Experiment(double (*fct_)(unsigned));
         
         void reset();
         
-        void set_function(void (*fct_)(unsigned));
+        void set_function(double (*fct_)(unsigned));
         
         double get_mean() const;
         double get_var() const;
@@ -32,7 +30,7 @@ class Experiment
         void print(ostream &flux) const;
         
     private:
-        void (*fct)(unsigned);     
+        double (*fct)(unsigned);     
         
         unsigned nb;
         unsigned param;

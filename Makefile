@@ -14,10 +14,10 @@ all: $(TARGET)
 main.hh: ; touch main.hh
 
 $(O_FILES): %.o: %.cc %.hh Makefile
-	g++ -Wall $*.cc -c
+	g++ -Wall -Wextra $*.cc -c
 
 $(TARGET): %: $(O_FILES) Makefile
-	g++ -Wall $(O_FILES) -o $*
+	g++ -Wall -Wextra $(O_FILES) -o $*
 
 ASTYLE_OPTIONS = 	--style=attach --indent=spaces=2
 

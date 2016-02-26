@@ -3,12 +3,6 @@
 using namespace std;
 
 
-// returns the difference between t1 and t2 in seconds
-static double time_diff(time_t t1, time_t t2)
-{
-    return (double)(t2 - t1) / CLOCKS_PER_SEC;
-}
-
 
 Experiment::Experiment()
 {
@@ -19,7 +13,7 @@ Experiment::Experiment()
     reset();
 }
 
-Experiment::Experiment(void (*fct_)(unsigned))
+Experiment::Experiment(double (*fct_)(unsigned))
 {
     fct = fct_;
     nb = 1;
@@ -35,7 +29,7 @@ void Experiment::reset()
     sd = 0.0;
 }
 
-void Experiment::set_function(void (*fct_)(unsigned))
+void Experiment::set_function(double (*fct_)(unsigned))
 {
     fct = fct_;
 }
@@ -55,9 +49,9 @@ double Experiment::get_sd() const
     return sd;
 }
 
-// executes the function f nb times, using param value,
+// executes the function fct nb times, using param value,
 // and computes mean value, variance, and standard deviation
-// of execution time
+// of the values returned by fct
 const Experiment& Experiment::operator()(unsigned nb_, unsigned param_)
 {
     nb = nb_;
@@ -70,12 +64,9 @@ const Experiment& Experiment::operator()(unsigned nb_, unsigned param_)
     
     for(unsigned i = 0; i < nb; i++)
     {
-        time_t t1 = clock();
-        fct(param);
-        time_t t2 = clock();
-        double t = time_diff(t1, t2);
-        mean += t;
-        var += t * t;
+        double x = fct(param);
+        mean += x;
+        var += x * x;
     }
     
     mean /= nb;

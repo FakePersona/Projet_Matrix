@@ -1,22 +1,48 @@
+
+#include "matrix.hh"
 #include "main.hh"
 
 using namespace std;
 
 
 
-
-void test1(unsigned size)
+// returns the difference between t1 and t2 in seconds
+static double time_diff(time_t t1, time_t t2)
 {
-    Matrix::random(size, size, -10.0, 10.).inverse();
+    return (double)(t2 - t1) / CLOCKS_PER_SEC;
 }
 
 
-void test2(unsigned size)
+double test1(unsigned size)
 {
-    Matrix M = Matrix::random(size, size, -10.0, 10.);
+    time_t t1 = clock();
+    Matrix<double>::random(size, size, -10.0, 10.).inverse();
+    
+    return time_diff(t1, clock());
+}
+
+double test2(unsigned size)
+{
+    time_t t1 = clock();
+
+    Matrix<double> M = Matrix<double>::random(size, size, -10.0, 10.);
     M.use_static(true);
     M.inverse();
+
+    return time_diff(t1, clock());
 }
+
+double test3(unsigned size)
+{
+    Matrix<double> M = Matrix<double>::Hilbert(size);
+    Matrix<double> MM = M.inverse();
+    Matrix<double> E = (M*MM);
+
+    cout << E << endl;
+    
+    return E.norm();
+}
+
 
 double mean(vector<double> v)
 {
@@ -46,10 +72,11 @@ int main()
     
     Experiment exp1(test1);
     Experiment exp2(test2);
+    Experiment exp3(test3);
     
     time_t begin, end;
     
-    Matrix m = Matrix::Hilbert(5);    
+    Matrix<double> m = Matrix<double>::Hilbert(7);    
     cout << m.inverse() * m << m * m.inverse() << endl;
     
     
@@ -57,17 +84,18 @@ int main()
     ofstream log("log2.csv");
     unsigned max = 42000;
     
-    /*
+    
     for(unsigned n = 2; n < 10; n++)
     {
         
         max /= n;
         if (max < 1)
             max = 1;
-        cout << "exp1 : " << exp1(max, n) << endl;
-        cout << "exp2 : " << exp2(max, n) << endl;
+     //   cout << "exp1 : " << exp1(max, n) << endl;
+     //   cout << "exp2 : " << exp2(max, n) << endl;
+        cout << "exp3 : " << exp3(10, n) << endl;
     }
-    */
+    
     
     
     max = 42000;
@@ -88,8 +116,8 @@ int main()
 	
         for(unsigned i = 0; i < max; i++)
         {
-            Matrix M = Matrix::random(n, n, -10.0, 10.);
-            Matrix M2(M.inverse());
+            Matrix<double> M = Matrix<double>::random(n, n, -10.0, 10.);
+            Matrix<double> M2(M.inverse());
 	    end = clock();
 	    slow.at(i) = (double)(end - begin) / CLOCKS_PER_SEC;
 	    begin = end;
@@ -107,9 +135,9 @@ int main()
 
         for(unsigned i = 0; i < max; i++)
         {
-            Matrix M = Matrix::random(n, n, -10.0, 10.);
+            Matrix<double> M = Matrix<double>::random(n, n, -10.0, 10.);
             M.use_static(true);
-            Matrix M2(M.inverse());
+            Matrix<double> M2(M.inverse());
 	    end = clock();
 	    fast.at(i) = (double)(end - begin) / CLOCKS_PER_SEC;
 	    begin = end;

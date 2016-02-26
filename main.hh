@@ -2,6 +2,6 @@
 
 #include <iostream>
 #include <fstream>
+#include <ctime>
 
-#include "matrix.hh"
 #include "experiment.hh"
