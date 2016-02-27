@@ -52,7 +52,7 @@
 %opening
 \title{PROG2: Inversion de matrices}
 \author{Rémi Hutin \and Rémy Sun}
-\date{26 février 2016}
+\date{28 février 2016}
 
 
 \begin{document}
@@ -64,6 +64,9 @@
   De plus, le calcul du déterminant par la méthode de Kramer engendre le calcul de beaucoup de sous-matrices, ce qui cause de gros problèmes de mémoire pour l'implémentation naïve des matrices.
 
   Nous proposons dans cet article une construction alternative du type matrice permettant d'éviter la construction explicite des sous-matrices et exposerons les diverses difficultées soulevées par cette construction.
+  \begin{keywords}
+    Matrice; Inversion; Sous-matrices implicites
+  \end{keywords}
 \end{abstract}
 
 \section{Implémentation de matrices}
@@ -106,7 +109,7 @@ Le calcul de l'inverse est sujet à des erreurs d'arrondis. De fait, il est néc
 
 La mesure de l'erreur a été définie par la norme infinie de $M\times M' - I_n$ ou $M'\times M - I_n$ où $M'$ est la matrice inverse calculée par le programme proposé.
 
-Pour $n \in \{2;3;\dots;9\}$ on génère les matrices de Hilbert de taille $n$ et on calcule l'erreur commise. (Voir figure 1) L'étude du cas des matrices de Hilbert est intéressante car c'est un exemple de matrices mal conditionnées pour la méthode de Kramer.
+Pour $n \in \{2;3;\dots;7\}$ on génère les matrices de Hilbert de taille $n$ et on calcule l'erreur commise. (Voir figure 1) L'étude du cas des matrices de Hilbert est intéressante car c'est un exemple de matrices mal conditionnées pour la méthode de Kramer.
 
 
 \begin{figure}
@@ -115,7 +118,6 @@ Pour $n \in \{2;3;\dots;9\}$ on génère les matrices de Hilbert de taille $n$ e
   \caption{Erreurs pour les matrices de Hilbert}
   \label{fig:phd}
 \end{figure}
-
 
 \section{Optimisation: implémentation des sous-matrices}
 
@@ -168,13 +170,13 @@ Nous avons annoncé à la partie précédente que cette nouvelle façon de proc�
 
 Pour vérifier cette affirmation, on a effectué l'expérience suivante:
 
-Pour $n \in \{2;3;\dots;9\}$ on génère des matrices aléatoires de taille $n$ et on compare les temps d'exécution de l'ancienne méthode et de la nouvelle.
+Pour $n \in \{2;3;\dots;8\}$ on génère des matrices aléatoires de taille $n$ et on compare les temps d'exécution de l'ancienne méthode et de la nouvelle.
 
 
 \begin{figure}
   \centering
   \includegraphics[scale=0.5]{Comparaison.png}
-  \caption{Comparaison des deux méthodes}
+  \caption{Comparaison des deux méthodesde l'ancienne méthode (rouge) et de la nouvelle (bleu) avec barres d'écart-type}
   \label{fig:phd}
 \end{figure}
 
